@@ -122,16 +122,10 @@ createMAC = function(derivedKey, cipherText){
             .digest();
 }
 
-exports.testVector = function(){
 
-    let salt = 'ae3cd4e7013836a3df6bd7241b12db061dbe2c6785853cce422d148a624ce0bd';
-    let passPhrase = 'testpassword'
-
-    let derivedKey = deriveKey(passPhrase, salt);
-    console.log('Derived key : ' + JSON.stringify(derivedKey))
-
-    let cipherObj = createCipherText(derivedKey['dk'].toString('hex'), new Buffer('6087dab2f9fdbbfaddc31a909735c1e6','hex'), new Buffer('7a28b5ba57c53603b0b07b56bba752f7784bf506fa95edc395f5cf6c7514fe9d','hex'));
-
-    console.log('Cipher : ' + JSON.stringify(cipherObj))
+function hello(){
+    let account = exports.createNewAccount('Passphrase goes here');
+    console.log(JSON.stringify(account));
 }
 
+hello();
