@@ -42,7 +42,7 @@ let quorumKeyPair = quorumKeyGen.newAccount('Pass phrase goes here');
 
 ## Acknowledgements
 
-This utility was made possible by the amazing contributions by the below authors
+This utility was made possible by the amazing contributions by below libraries and their authors
 
 1. [secp256k1](https://www.npmjs.com/package/secp256k1)
 2. [keccak](https://www.npmjs.com/package/keccak)
