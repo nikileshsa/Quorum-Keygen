@@ -121,11 +121,3 @@ createMAC = function(derivedKey, cipherText){
             .update(Buffer.concat([derivedKeyBuf, cipherTextBuf], derivedKeyBuf.length + cipherTextBuf.length))
             .digest();
 }
-
-
-function hello(){
-    let account = exports.createNewAccount('Passphrase goes here');
-    console.log(JSON.stringify(account));
-}
-
-hello();
