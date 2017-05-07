@@ -89,13 +89,11 @@ deriveKey = function(passPhrase, salt){
 }
 
 createCipherText = function(derivedKey, ivBuf, operand){
-
     // Cipher key = Highest 16 bytes of derived key
     let cipherKeyBuf = new Buffer(derivedKey,'hex').slice(0,16);
     let cipher = crypto.createCipheriv('aes-128-ctr',cipherKeyBuf,ivBuf)
     let cipherText = cipher.update(operand,'utf8','hex');
     cipherText += cipher.final('hex');
-
     /**
      * MAC = keccak256( concat(<second highest 16 bytes> + ciphertext) )
      */
@@ -120,4 +118,18 @@ createMAC = function(derivedKey, cipherText){
     return keccak('keccak256')
             .update(Buffer.concat([derivedKeyBuf, cipherTextBuf], derivedKeyBuf.length + cipherTextBuf.length))
             .digest();
+}
+
+exports.runTests = function(passphrase, secret, salt, iv){
+
+    let kdf     = deriveKey(passphrase, salt);
+    let cipher  = createCipherText(kdf.dk, new Buffer(iv, 'hex'), new Buffer(secret,'hex'));    
+    let mac     = createMAC(kdf['dk'], cipher['ciphertext']);
+
+    return {
+        kdf     : kdf,
+        cipher  : cipher,
+        mac     : mac.toString('hex')
+    }
+
 }
