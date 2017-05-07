@@ -22,22 +22,55 @@ var quorumKeygen = require('./index');
  let mac        = '517ead924a9d0dc3124507e3393d175ce3ff7c1e96529c6c555ce9e51205e9b2'
 /*-----------------------------------------------------------------------*/
 
-let result = quorumKeygen.runTests(passPhrase, secret, salt, inputVector);
 
-describe('Key Derivation',() => {
-    it(`Derived key should match ${derivedKey}`, () => {
-        result.kdf.dk.should.equal(derivedKey);
-    })    
-});
+describe('From Test Vectors', () => {
+    let result = quorumKeygen.runTests(passPhrase, secret, salt, inputVector);
+    describe('Key Derivation',() => {
+        it(`Derived key should match ${derivedKey}`, () => {
+            result.kdf.dk.should.equal(derivedKey);
+        })    
+    });
 
-describe('Cipher', () => {
-    it(`Cipher text should match ${cipherText} ` , () => {
-        result.cipher.ciphertext.should.equal(cipherText);
+    describe('Cipher', () => {
+        it(`Cipher text should match ${cipherText} ` , () => {
+            result.cipher.ciphertext.should.equal(cipherText);
+        })
+    })
+
+    describe('Message Authentication Code' , () => {
+        it(`MAC should equal ${mac}`, () => {
+            result.mac.should.equal(mac);
+        })
     })
 })
 
-describe('Message Authentication Code' , () => {
-    it(`MAC should equal ${mac}`, () => {
-        result.mac.should.equal(mac);
+
+describe('New key pair generation' ,  () => {
+    let keypair = quorumKeygen.createNewAccount(passPhrase);
+    describe('Integrity', () => {
+        it('Result should be a well formed JSON', () => {
+            keypair.should.be.a('object');
+        })
+
+        it('Address, Crypto, Id and version are populated' , () => {
+            keypair.should.have.all.keys('address','crypto','id','version');
+        })
+
+        it('MAC should be a 32 byte string' , () => {
+            keypair.crypto.mac.should.have.lengthOf(64);
+        })
     })
+    
+    describe('Key derivation function', () => {
+        it('KDF parameters are populated' , () => {
+            keypair.crypto.kdfparams.should.have.all.keys(['c','dklen','prf','salt'])
+        });
+    })
+
+    describe('Cipher', () => {
+        it('Input vector is populated', () => {
+            keypair.crypto.cipherparams.should.have.all.keys(['iv'])
+        })
+    })
+    
 })
