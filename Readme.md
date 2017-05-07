@@ -31,11 +31,11 @@ let quorumKeyPair = quorumKeyGen.newAccount('Pass phrase goes here');
       "c": 262144,
       "dklen": 32,
       "prf": "hmac-sha256",
-      "salt": "38be5505b42344de 6426e918442e2e5f1f48b543f74d36640ecabf5f506151fb"
+      "salt": "38be5505b42344de6426e918442e2e5f1f48b543f74d36640ecabf5f506151fb"
     },
     "mac": "7f4843064ba4424b5385da19c08d7e29ac80ff6b067a1149cdfef8c5e4aeab0e"
   },
-  "id": "127587ad-077b-4835-9643-3094 702ece74",
+  "id": "127587ad-077b-4835-9643-3094702ece74",
   "version": 3
 }
 ```
