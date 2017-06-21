@@ -1,0 +1,32 @@
+{
+  "name": "quorum-keygen",
+  "version": "1.0.0",
+  "description": "Utility to create Quorum (Ethereum) keypairs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/broadridge-labs/Quorum-Keygen.git"
+  },
+  "keywords": [
+    "Quorum",
+    "Ethereum",
+    "Quorum",
+    "Accounts"
+  ],
+  "author": "Ashfaq Ahmed Shaik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/broadridge-labs/Quorum-Keygen/issues"
+  },
+  "homepage": "https://github.com/broadridge-labs/Quorum-Keygen#readme",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "keccak": "^1.2.0",
+    "mocha": "^3.3.0",
+    "secp256k1": "^3.2.5",
+    "uuid": "^3.0.1"
+  }
+}
