@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 
 var chai    = require('chai');
 var should  = chai.should();
 
-var quorumKeygen = require('./index');
+var quorumKeygen = require('../index');
 
 /*-----------------------------------------------------------------------*
  * Test Vectors 

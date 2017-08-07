@@ -1,19 +1,28 @@
 /*
  * +--------------------------------------------------------------+
  *  Quorum Account Creator v1.0
- *  Author : Ashfaq Ahmed S [https://github.com/0yukikaze0]
+ *  Author : Ashfaq Ahmed S [https://github.com/broadridge-labs]
  * +--------------------------------------------------------------+
  */
 var secp256k1   = require('secp256k1');
 var keccak      = require('keccak')
 var crypto      = require('crypto');
 var uuid        = require('uuid/v4');
+var nodeKeyGen  = require('./NodeKeyGen');
+
+/**
+ * Creates a Quorum / Ethereum node key pair
+ * +- Can generate a public key from existing private key (HEX)
+ */
+exports.generateNodeKeys = (privateKeyHex) => {    
+    return nodeKeyGen.generateNodeKeys(privateKeyHex);
+}
 /**
  * Creates a Quorum account
  * @param {string} passPhrase to the lock the private key
  * @return {Object}
  */
-exports.createNewAccount = function(passPhrase){
+exports.createNewAccount = (passPhrase) => {
 
     /**
      * +--------------------------------+
@@ -74,7 +83,7 @@ exports.createNewAccount = function(passPhrase){
             }
 }
 
-deriveKey = function(passPhrase, salt){
+deriveKey = (passPhrase, salt) => {
     let derivedKey = crypto.pbkdf2Sync(passPhrase,new Buffer(salt,'hex'), 262144, 32, 'sha256');
     return {
         "kdf" : "pbkdf2",
@@ -88,7 +97,7 @@ deriveKey = function(passPhrase, salt){
     }
 }
 
-createCipherText = function(derivedKey, ivBuf, operand){
+createCipherText = (derivedKey, ivBuf, operand) => {
     // Cipher key = Highest 16 bytes of derived key
     let cipherKeyBuf = new Buffer(derivedKey,'hex').slice(0,16);
     let cipher = crypto.createCipheriv('aes-128-ctr',cipherKeyBuf,ivBuf)
@@ -110,7 +119,7 @@ createCipherText = function(derivedKey, ivBuf, operand){
 
 }
 
-createMAC = function(derivedKey, cipherText){
+createMAC = (derivedKey, cipherText) => {
 
     let derivedKeyBuf = new Buffer(derivedKey,'hex').slice(16,32);
     let cipherTextBuf = new Buffer(cipherText,'hex');
@@ -120,7 +129,7 @@ createMAC = function(derivedKey, cipherText){
             .digest();
 }
 
-exports.runTests = function(passphrase, secret, salt, iv){
+exports.runTests = (passphrase, secret, salt, iv) => {
 
     let kdf     = deriveKey(passphrase, salt);
     let cipher  = createCipherText(kdf.dk, new Buffer(iv, 'hex'), new Buffer(secret,'hex'));    
