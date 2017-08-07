@@ -1,13 +1,18 @@
 /*
  * +--------------------------------------------------------------+
  *  Quorum Account Creator v1.0
+<<<<<<< HEAD
  *  Author : Ashfaq Ahmed S [https://github.com/broadridge-labs]
+=======
+ *  Author : Ashfaq Ahmed S [https://github.com/0yukikaze0]
+>>>>>>> 7563f6371299e5a3f6941d823f01ba86fe756d9c
  * +--------------------------------------------------------------+
  */
 var secp256k1   = require('secp256k1');
 var keccak      = require('keccak')
 var crypto      = require('crypto');
 var uuid        = require('uuid/v4');
+<<<<<<< HEAD
 var nodeKeyGen  = require('./NodeKeyGen');
 
 /**
@@ -17,12 +22,18 @@ var nodeKeyGen  = require('./NodeKeyGen');
 exports.generateNodeKeys = (privateKeyHex) => {    
     return nodeKeyGen.generateNodeKeys(privateKeyHex);
 }
+=======
+>>>>>>> 7563f6371299e5a3f6941d823f01ba86fe756d9c
 /**
  * Creates a Quorum account
  * @param {string} passPhrase to the lock the private key
  * @return {Object}
  */
+<<<<<<< HEAD
 exports.createNewAccount = (passPhrase) => {
+=======
+exports.createNewAccount = function(passPhrase){
+>>>>>>> 7563f6371299e5a3f6941d823f01ba86fe756d9c
 
     /**
      * +--------------------------------+
@@ -83,7 +94,11 @@ exports.createNewAccount = (passPhrase) => {
             }
 }
 
+<<<<<<< HEAD
 deriveKey = (passPhrase, salt) => {
+=======
+deriveKey = function(passPhrase, salt){
+>>>>>>> 7563f6371299e5a3f6941d823f01ba86fe756d9c
     let derivedKey = crypto.pbkdf2Sync(passPhrase,new Buffer(salt,'hex'), 262144, 32, 'sha256');
     return {
         "kdf" : "pbkdf2",
@@ -97,7 +112,11 @@ deriveKey = (passPhrase, salt) => {
     }
 }
 
+<<<<<<< HEAD
 createCipherText = (derivedKey, ivBuf, operand) => {
+=======
+createCipherText = function(derivedKey, ivBuf, operand){
+>>>>>>> 7563f6371299e5a3f6941d823f01ba86fe756d9c
     // Cipher key = Highest 16 bytes of derived key
     let cipherKeyBuf = new Buffer(derivedKey,'hex').slice(0,16);
     let cipher = crypto.createCipheriv('aes-128-ctr',cipherKeyBuf,ivBuf)
@@ -119,7 +138,11 @@ createCipherText = (derivedKey, ivBuf, operand) => {
 
 }
 
+<<<<<<< HEAD
 createMAC = (derivedKey, cipherText) => {
+=======
+createMAC = function(derivedKey, cipherText){
+>>>>>>> 7563f6371299e5a3f6941d823f01ba86fe756d9c
 
     let derivedKeyBuf = new Buffer(derivedKey,'hex').slice(16,32);
     let cipherTextBuf = new Buffer(cipherText,'hex');
@@ -129,7 +152,11 @@ createMAC = (derivedKey, cipherText) => {
             .digest();
 }
 
+<<<<<<< HEAD
 exports.runTests = (passphrase, secret, salt, iv) => {
+=======
+exports.runTests = function(passphrase, secret, salt, iv){
+>>>>>>> 7563f6371299e5a3f6941d823f01ba86fe756d9c
 
     let kdf     = deriveKey(passphrase, salt);
     let cipher  = createCipherText(kdf.dk, new Buffer(iv, 'hex'), new Buffer(secret,'hex'));    

@@ -2,16 +2,13 @@
   "name": "quorum-keygen",
   "version": "1.0.1",
   "description": "Utility to create Quorum (Ethereum) keypairs",
-  "publishConfig": {
-    "registry": "https://nexus.devops.broadridge.net/repository/BLOCKCHAIN-NPM-HOSTED/"
-  },
   "main": "index.js",
   "scripts": {
     "test": "mocha tests"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/0yukikaze0/Quorum-Keygen.git"
+    "url": "git+https://github.com/broadridge-labs/Quorum-Keygen.git"
   },
   "keywords": [
     "Quorum",
@@ -22,9 +19,9 @@
   "author": "Ashfaq Ahmed Shaik",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/0yukikaze0/Quorum-Keygen/issues"
+    "url": "https://github.com/broadridge-labs/Quorum-Keygen/issues"
   },
-  "homepage": "https://github.com/0yukikaze0/Quorum-Keygen#readme",
+  "homepage": "https://github.com/broadridge-labs/Quorum-Keygen#readme",
   "dependencies": {
     "chai": "^3.5.0",
     "keccak": "^1.2.0",
