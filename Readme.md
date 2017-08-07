@@ -8,10 +8,24 @@ Implements Version 3 of the Web3 secret storage spec
 
 Install : `npm install --save quorum-keygen`
 
+Quorum / Ethereum account generation
 ```
 var quorumKeyGen = require('quorum-keygen');
 
 let quorumKeyPair = quorumKeyGen.newAccount('Pass phrase goes here');
+
+```
+
+Quorum / Ethereum node key pair generation
+```
+
+var quorumKeyGen = require('quorum-keygen');
+
+let nodeKeyPair = quorumKeyGen.generateNodeKeys();
+
+// OR generate public key from a private key in hex
+
+let nodeKeyPair = quorumKeyGen.generateNodeKeys('77bd02ffa26e3fb8f324bda24ae588066f1873d95680104de5bc2db9e7b2e510');
 
 ```
 
