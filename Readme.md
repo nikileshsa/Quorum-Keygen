@@ -1,6 +1,8 @@
 # Quorum Account Keypair Generator
 
-Simple javascript utility to generate [Quorum](https://github.com/jpmorganchase/quorum) / [Ethereum](https://github.com/ethereum/go-ethereum) key pair JSON's
+Simple javascript utility to generate
+1.  [Quorum](https://github.com/jpmorganchase/quorum) / [Ethereum](https://github.com/ethereum/go-ethereum) account key pair JSON's
+2. [Quorum](https://github.com/jpmorganchase/quorum) / [Ethereum](https://github.com/ethereum/go-ethereum) Node key pairs
 
 Implements Version 3 of the Web3 secret storage spec
 
@@ -8,7 +10,7 @@ Implements Version 3 of the Web3 secret storage spec
 
 Install : `npm install --save quorum-keygen`
 
-Quorum / Ethereum account generation
+### Quorum / Ethereum account generation
 ```
 var quorumKeyGen = require('quorum-keygen');
 
@@ -16,27 +18,14 @@ let quorumKeyPair = quorumKeyGen.newAccount('Pass phrase goes here');
 
 ```
 
-Quorum / Ethereum node key pair generation
-```
-
-var quorumKeyGen = require('quorum-keygen');
-
-let nodeKeyPair = quorumKeyGen.generateNodeKeys();
-
-// OR generate public key from a private key in hex
-
-let nodeKeyPair = quorumKeyGen.generateNodeKeys('77bd02ffa26e3fb8f324bda24ae588066f1873d95680104de5bc2db9e7b2e510');
-
-```
-
-### Output :
+Output :
 
 ```
 {
   "address": "eee9b1362a6eee608d56538bd619ba4e9c525022",
   "crypto": {
     "cipher": "aes-128-ctr",
-    "ciphertext": "ea7ca8fd9965f1621918ee4875cb3572e11c049014ff34b3e67c3c09ea 6ff8bf",
+    "ciphertext": "ea7ca8fd9965f1621918ee4875cb3572e11c049014ff34b3e67c3c09ea6ff8bf",
     "cipherparams": {
       "iv": "5c6ff4dbc9dda4b33e74e02c9f99dcd0"
     },
@@ -53,7 +42,27 @@ let nodeKeyPair = quorumKeyGen.generateNodeKeys('77bd02ffa26e3fb8f324bda24ae5880
   "version": 3
 }
 ```
+### Quorum / Ethereum node key pair generation
+```
 
+var quorumKeyGen = require('quorum-keygen');
+
+let nodeKeyPair = quorumKeyGen.generateNodeKeys();
+
+// OR generate public key from a private key in hex
+
+let nodeKeyPair = quorumKeyGen.generateNodeKeys('77bd02ffa26e3fb8f324bda24ae588066f1873d95680104de5bc2db9e7b2e510');
+
+```
+
+Output :
+
+```
+{
+  "privateKey" : "77bd02ffa26e3fb8f324bda24ae588066f1873d95680104de5bc2db9e7b2e510",
+  "publicKey" : "61077a284f5ba7607ab04f33cfde2750d659ad9af962516e159cf6ce708646066cd927a900944ce393b98b95c914e4d6c54b099f568342647a1cd4a262cc0423"
+}
+```
 ## Acknowledgements
 
 This utility was made possible by the amazing contributions by below libraries and their authors
