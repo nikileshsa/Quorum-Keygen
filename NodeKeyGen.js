@@ -14,18 +14,14 @@ exports.generateNodeKeys = (privateKeyHex) => {
 
     let privateKeyBuf = null;
     if(privateKeyHex != undefined){
-        console.log('+- Operating on provided private key (hex)');
         privateKeyBuf = new Buffer(privateKeyHex, 'hex');
     } else {
-        console.log('+- Generating private key');
         privateKeyBuf = _generatePrivateKey();
     }
 
     // Generate public key
-    console.log('+- Generating public key');
     let publicKeyBuf = _generatePublicKey(privateKeyBuf);
 
-    console.log('+- Key pair generation completed');
     /** Return key pair to caller */
     return {
         "privateKey"    : privateKeyBuf.toString('hex'),
